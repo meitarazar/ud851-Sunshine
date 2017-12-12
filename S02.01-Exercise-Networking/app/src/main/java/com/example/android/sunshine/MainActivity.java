@@ -22,6 +22,9 @@ import android.widget.TextView;
 
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.utilities.NetworkUtils;
+import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -94,14 +97,25 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(URL... urls) {
             URL url = urls[0];
 
-            String result = "";
+            StringBuilder result = new StringBuilder();
             try {
-                result = NetworkUtils.getResponseFromHttpUrl(url);
+                String jsonString = NetworkUtils.getResponseFromHttpUrl(url);
+
+                String[] parsedResult = OpenWeatherJsonUtils.getSimpleWeatherStringsFromJson(MainActivity.this, jsonString);
+
+                if (parsedResult != null) {
+                    for (String dummyWeatherDay : parsedResult) {
+                        result.append(dummyWeatherDay)
+                                .append("\n\n\n");
+                    }
+                }
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            return result;
+            return result.toString();
         }
 
         @Override
