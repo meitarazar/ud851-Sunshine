@@ -18,6 +18,7 @@ package com.example.android.sunshine;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
 import java.net.URL;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -138,7 +140,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             // COMPLETED (10) If the weather data was null, show the error message
-            showErrorMessage();
+            else {
+                showErrorMessage();
+            }
         }
     }
 
