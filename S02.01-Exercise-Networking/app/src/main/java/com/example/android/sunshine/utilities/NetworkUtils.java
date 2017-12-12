@@ -71,9 +71,9 @@ public final class NetworkUtils {
         // COMPLETED (1) Fix this method to return the URL used to query Open Weather Map's API
         Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
                 .appendQueryParameter(QUERY_PARAM, locationQuery)
-                .appendQueryParameter(DAYS_PARAM, String.valueOf(numDays))
-                .appendQueryParameter(UNITS_PARAM, units)
                 .appendQueryParameter(FORMAT_PARAM, format)
+                .appendQueryParameter(UNITS_PARAM, units)
+                .appendQueryParameter(DAYS_PARAM, String.valueOf(numDays))
                 .build();
 
         URL url = null;
