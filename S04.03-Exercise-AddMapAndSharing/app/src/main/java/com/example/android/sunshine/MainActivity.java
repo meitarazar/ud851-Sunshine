@@ -221,7 +221,22 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
             return true;
         }
 
-        // TODO (2) Launch the map when the map menu item is clicked
+        // COMPLETED (2) Launch the map when the map menu item is clicked
+        else if (id == R.id.action_open_map) {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+
+            Uri uri = new Uri.Builder()
+                    .scheme("geo")
+                    .path("0,0")
+                    .appendQueryParameter("q", "221b Baker Street, London, UK")
+                    .build();
+            i.setData(uri);
+
+            if (i.resolveActivity(getPackageManager()) != null) {
+                startActivity(i);
+            }
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
