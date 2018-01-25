@@ -324,7 +324,7 @@ public class WeatherProvider extends ContentProvider {
         }
 
         Context context = getContext();
-        if (context != null) {
+        if (context != null && deleted > 0) {
             context.getContentResolver().notifyChange(uri, null);
         }
 
