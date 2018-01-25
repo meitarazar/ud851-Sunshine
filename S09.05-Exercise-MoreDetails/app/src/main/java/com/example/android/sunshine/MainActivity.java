@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -85,7 +86,10 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
-        getSupportActionBar().setElevation(0f);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setElevation(0f);
+        }
 
         FakeDataUtils.insertFakeData(this);
 
@@ -162,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements
      * an implicit Intent. This super-handy Intent is detailed in the "Common Intents" page of
      * Android's developer site:
      *
-     * @see "http://developer.android.com/guide/components/intents-common.html#Maps"
+     * @see <a href="http://developer.android.com/guide/components/intents-common.html#Maps">Common Intents - Maps @ developer.android.com</a>
      * <p>
      * Protip: Hold Command on Mac or Control on Windows and click that link to automagically
      * open the Common Intents page
@@ -258,19 +262,19 @@ public class MainActivity extends AppCompatActivity implements
         mForecastAdapter.swapCursor(null);
     }
 
-    //  TODO (38) Refactor onClick to accept a long instead of a String as its parameter
+    //  COMPLETED (38) Refactor onClick to accept a long instead of a String as its parameter
     /**
      * This method is for responding to clicks from our list.
      *
-     * @param weatherForDay String describing weather details for a particular day
+     * @param date Normalized UTC time that represents the local date of the weather in GMT time.
      */
     @Override
-    public void onClick(String weatherForDay) {
-//      TODO (39) Refactor onClick to build a URI for the clicked date and and pass it with the Intent using setData
+    public void onClick(long date) {
+//      COMPLETED (39) Refactor onClick to build a URI for the clicked date and and pass it with the Intent using setData
         Context context = this;
         Class destinationClass = DetailActivity.class;
         Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-        intentToStartDetailActivity.putExtra(Intent.EXTRA_TEXT, weatherForDay);
+        intentToStartDetailActivity.setData(WeatherContract.WeatherEntry.buildWeatherUriWithDate(date));
         startActivity(intentToStartDetailActivity);
     }
 
