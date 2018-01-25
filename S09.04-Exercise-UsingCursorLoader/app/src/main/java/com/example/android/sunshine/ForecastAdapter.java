@@ -61,7 +61,7 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
      * @param clickHandler The on-click handler for this adapter. This single handler is called
      *                     when an item is clicked.
      */
-    public ForecastAdapter(Context context, ForecastAdapterOnClickHandler clickHandler) {
+    ForecastAdapter(Context context, ForecastAdapterOnClickHandler clickHandler) {
         mContext = context;
         mClickHandler = clickHandler;
     }
@@ -82,8 +82,7 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         Context context = viewGroup.getContext();
         int layoutIdForListItem = R.layout.forecast_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
-        boolean shouldAttachToParentImmediately = false;
-        View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
+        View view = inflater.inflate(layoutIdForListItem, viewGroup, false);
         return new ForecastAdapterViewHolder(view);
     }
 
@@ -104,7 +103,7 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
         mCursor.moveToPosition(position);
 
 //      COMPLETED (7) Generate a weather summary with the date, description, high and low
-        long dateMillis = mCursor.getLong(MainActivity.WEATHER_ID_COLUMN_POS);
+        long dateMillis = mCursor.getLong(MainActivity.WEATHER_DATE_COLUMN_POS);
         String date = SunshineDateUtils.getFriendlyDateString(mContext, dateMillis, false);
 
         int id = mCursor.getInt(MainActivity.WEATHER_ID_COLUMN_POS);
@@ -136,7 +135,7 @@ class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapt
 
     //  COMPLETED (11) Create a new method that allows you to swap Cursors.
     //  COMPLETED (12) After the new Cursor is set, call notifyDataSetChanged
-    public void swapCursor(Cursor cursor) {
+    void swapCursor(Cursor cursor) {
         mCursor = cursor;
         notifyDataSetChanged();
     }
