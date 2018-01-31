@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,6 +35,7 @@ import android.widget.ProgressBar;
 
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
+import com.example.android.sunshine.sync.SunshineSyncUtils;
 import com.example.android.sunshine.utilities.FakeDataUtils;
 
 public class MainActivity extends AppCompatActivity implements
@@ -84,10 +86,13 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
-        getSupportActionBar().setElevation(0f);
 
-        // TODO (12) Remove the fake data creation since we can now sync with live data
-        FakeDataUtils.insertFakeData(this);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setElevation(0f);
+        }
+
+        // COMPLETED (12) Remove the fake data creation since we can now sync with live data
 
         /*
          * Using findViewById, we get a reference to our RecyclerView from xml. This allows us to
@@ -155,8 +160,8 @@ public class MainActivity extends AppCompatActivity implements
          */
         getSupportLoaderManager().initLoader(ID_FORECAST_LOADER, null, this);
 
-        //  TODO (13) Call SunshineSyncUtils's startImmediateSync method
-
+        // COMPLETED (13) Call SunshineSyncUtils's startImmediateSync method
+        SunshineSyncUtils.startImmediateSync(this);
     }
 
     /**
@@ -164,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements
      * an implicit Intent. This super-handy Intent is detailed in the "Common Intents" page of
      * Android's developer site:
      *
-     * @see "http://developer.android.com/guide/components/intents-common.html#Maps"
+     * @see <a href="http://developer.android.com/guide/components/intents-common.html#Maps">Common Intents - Maps @ developer.android.com</a>
      * <p>
      * Protip: Hold Command on Mac or Control on Windows and click that link to automagically
      * open the Common Intents page
