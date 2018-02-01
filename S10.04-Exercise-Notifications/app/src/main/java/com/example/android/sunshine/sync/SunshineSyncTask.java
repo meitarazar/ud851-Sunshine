@@ -18,14 +18,17 @@ package com.example.android.sunshine.sync;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.text.format.DateUtils;
 
+import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
 import com.example.android.sunshine.utilities.NetworkUtils;
+import com.example.android.sunshine.utilities.NotificationUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
 import java.net.URL;
 
-public class SunshineSyncTask {
+class SunshineSyncTask {
 
     /**
      * Performs the network request for updated weather, parses the JSON from that request, and
@@ -35,7 +38,7 @@ public class SunshineSyncTask {
      *
      * @param context Used to access utility methods and the ContentResolver
      */
-    synchronized public static void syncWeather(Context context) {
+    synchronized static void syncWeather(Context context) {
 
         try {
             /*
@@ -73,11 +76,16 @@ public class SunshineSyncTask {
                         WeatherContract.WeatherEntry.CONTENT_URI,
                         weatherValues);
 
-//              TODO (13) Check if notifications are enabled
+                // COMPLETED (13) Check if notifications are enabled
+                boolean notificationEnabled = SunshinePreferences.areNotificationsEnabled(context);
 
-//              TODO (14) Check if a day has passed since the last notification
+                // COMPLETED (14) Check if a day has passed since the last notification
+                long lastNotificationMillis = SunshinePreferences.getEllapsedTimeSinceLastNotification(context);
 
-//              TODO (15) If more than a day have passed and notifications are enabled, notify the user
+                // COMPLETED (15) If more than a day have passed and notifications are enabled, notify the user
+                if (notificationEnabled && lastNotificationMillis >= DateUtils.DAY_IN_MILLIS) {
+                    NotificationUtils.notifyUserOfNewWeather(context);
+                }
 
             /* If the code reaches this point, we have successfully performed our sync */
 
