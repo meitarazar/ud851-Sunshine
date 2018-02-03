@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2016 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,84 +25,158 @@
   - Note that this is the PORTRAIT version of the layout.                                        -
   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-<!-- TODO (31) Delete the old layout completely -->
+<!-- COMPLETED (31) Delete the old layout completely -->
 
-<!-- TODO (35) Surround the entire layout with <layout/> tags for data binding -->
+<!-- COMPLETED (35) Surround the entire layout with <layout/> tags for data binding -->
 
-<!-- TODO (34) Create a LinearLayout to contain two included layouts that share equal space -->
+<!-- COMPLETED (34) Create a LinearLayout to contain two included layouts that share equal space -->
 
-<!-- TODO (25) Create a layout called primary_weather_info.xml -->
-<!-- TODO (26) Surround the entire layout with <layout/> tags for data binding -->
-<!-- TODO (27) Using ConstraintLayout, create the primary weather info layout -->
-<!-- TODO (32) Include the primary_weather_info layout -->
+<!-- COMPLETED (25) Create a layout called primary_weather_info.xml -->
+<!-- COMPLETED (26) Surround the entire layout with <layout/> tags for data binding -->
+<!-- COMPLETED (27) Using ConstraintLayout, create the primary weather info layout -->
+<!-- COMPLETED (32) Include the primary_weather_info layout -->
 
-<!-- TODO (28) Create a layout called extra_weather_details.xml -->
-<!-- TODO (29) Surround the entire layout with <layout/> tags for data binding -->
-<!-- TODO (30) Using ConstraintLayout, create the extra weather details layout -->
-<!-- TODO (33) Include the extra_weather_details layout -->
+<!-- COMPLETED (28) Create a layout called extra_weather_details.xml -->
+<!-- COMPLETED (29) Surround the entire layout with <layout/> tags for data binding -->
+<!-- COMPLETED (30) Using ConstraintLayout, create the extra weather details layout -->
+<!-- COMPLETED (33) Include the extra_weather_details layout -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="8dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/date"
-        style="@style/TextAppearance.AppCompat.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Saturday, September 24"/>
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Saturday, September 24" />
 
-    <!-- Text that describes weather condition -->
-    <TextView
-        android:id="@+id/weather_description"
-        style="@style/TextAppearance.AppCompat.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Rainy"/>
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date"
+            tools:src="@drawable/art_rain" />
 
-    <!-- High temperature for today -->
-    <TextView
-        android:id="@+id/high_temperature"
-        style="@style/TextAppearance.AppCompat.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="19\u00b0"/>
+        <!-- Text that describes weather condition -->
+        <TextView
+            android:id="@+id/weather_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textSize="23sp"
+            app:layout_constraintStart_toEndOf="@id/icon"
+            app:layout_constraintTop_toTopOf="@id/icon"
+            tools:text="Rainy" />
 
-    <!-- Low temperature for today -->
-    <TextView
-        android:id="@+id/low_temperature"
-        style="@style/TextAppearance.AppCompat.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="10\u00b0"/>
+        <!-- High temperature for today -->
+        <TextView
+            android:id="@+id/high_temperature"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="55sp"
+            app:layout_constraintStart_toStartOf="@id/weather_description"
+            app:layout_constraintTop_toBottomOf="@id/weather_description"
+            tools:text="19\u00b0" />
 
-    <!-- Humidity  -->
-    <TextView
-        android:id="@+id/humidity"
-        style="@style/TextAppearance.AppCompat.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="38%"/>
+        <!-- Low temperature for today -->
+        <TextView
+            android:id="@+id/low_temperature"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="38sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/high_temperature"
+            app:layout_constraintStart_toEndOf="@id/high_temperature"
+            tools:text="10\u00b0" />
 
-    <!-- Pressure  -->
-    <TextView
-        android:id="@+id/pressure"
-        style="@style/TextAppearance.AppCompat.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="995 hPa"/>
+        <!-- Humidity  -->
+        <TextView
+            android:id="@+id/humidity_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="36dp"
+            android:text="@string/humidity_label"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/icon"
+            app:layout_constraintTop_toBottomOf="@id/icon" />
 
-    <!-- Wind  -->
-    <TextView
-        android:id="@+id/wind"
-        style="@style/TextAppearance.AppCompat.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="4km/h NW"/>
+        <TextView
+            android:id="@+id/humidity"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="@id/humidity_label"
+            app:layout_constraintTop_toBottomOf="@id/humidity_label"
+            tools:text="38%" />
 
-</LinearLayout>
+        <!-- Pressure  -->
+        <TextView
+            android:id="@+id/pressure_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/pressure_label"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/humidity_label"
+            app:layout_constraintTop_toBottomOf="@id/humidity" />
+
+        <TextView
+            android:id="@+id/pressure"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="@id/humidity"
+            app:layout_constraintTop_toBottomOf="@id/pressure_label"
+            tools:text="995 hPa" />
+
+        <!-- Wind  -->
+        <TextView
+            android:id="@+id/wind_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/wind_label"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@id/pressure_label"
+            app:layout_constraintTop_toBottomOf="@id/pressure" />
+
+        <TextView
+            android:id="@+id/wind"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="@id/pressure"
+            app:layout_constraintTop_toBottomOf="@id/wind_label"
+            tools:text="4km/h NW" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
